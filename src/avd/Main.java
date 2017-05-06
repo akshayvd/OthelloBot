@@ -1,4 +1,4 @@
-package avd.ai;
+package avd;
 
 public class Main {
 
