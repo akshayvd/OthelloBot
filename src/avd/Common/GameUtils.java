@@ -1,7 +1,6 @@
-package avd.ai.Common;
+package avd.Common;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by avdmy on 5/6/2017.
