@@ -27,121 +27,126 @@ public class GameUtils {
     }
 
     public static char[][] actionResult(char[][] board, int x, int y, char player) {
+        char[][] newBoard = new char[board.length][board[0].length];
+        for(int i = 0; i < board.length; i++){
+            System.arraycopy(board[i], 0, newBoard[i], 0, board[0].length);
+        }
+        newBoard[x][y] = player;
         char opponent = player == 'X' ? 'O' : 'X';
         int d = 1;
-        if (x > 0 && y > 0 && (board[x - 1][y - 1] == opponent)) {
+        if (x > 0 && y > 0 && (newBoard[x - 1][y - 1] == opponent)) {
             d = 1;
-            while (board[x - d][y - d] == opponent) {
+            while (newBoard[x - d][y - d] == opponent) {
                 d++;
                 if (x < d || y < d) {
                     d--;
                     break;
                 }
-                if (board[x - d][y - d] == player) {
+                if (newBoard[x - d][y - d] == player) {
                     while (d > 0) {
-                        board[x - d][y - d] = player;
+                        newBoard[x - d][y - d] = player;
                         d--;
                     }
                 }
             }
         }
-        if (x > 0 && (board[x - 1][y] == opponent)) {
+        if (x > 0 && (newBoard[x - 1][y] == opponent)) {
             d = 1;
-            while (board[x - d][y] == opponent) {
+            while (newBoard[x - d][y] == opponent) {
                 d++;
                 if (x < d) {
                     d--;
                     break;
                 }
-                if (board[x - d][y] == player) {
+                if (newBoard[x - d][y] == player) {
                     while (d > 0) {
-                        board[x - d][y] = player;
+                        newBoard[x - d][y] = player;
                         d--;
                     }
                 }
             }
         }
-        if (x > 0 && y < board[0].length - 1 && (board[x - 1][y + 1] == opponent)) {
+        if (x > 0 && y < newBoard[0].length - 1 && (newBoard[x - 1][y + 1] == opponent)) {
             d = 1;
-            while (board[x - d][y + d] == opponent) {
+            while (newBoard[x - d][y + d] == opponent) {
                 d++;
-                if (x < d || y + d >= board[0].length) {
+                if (x < d || y + d >= newBoard[0].length) {
                     d--;
                     break;
                 }
-                if (board[x - d][y + d] == player) {
+                if (newBoard[x - d][y + d] == player) {
                     while (d > 0) {
-                        board[x - d][y + d] = player;
+                        newBoard[x - d][y + d] = player;
                         d--;
                     }
                 }
             }
         }
-        if (y > 0 && (board[x][y - 1] == opponent)) {
+        if (y > 0 && (newBoard[x][y - 1] == opponent)) {
             d = 1;
-            while (board[x][y - d] == opponent) {
+            while (newBoard[x][y - d] == opponent) {
                 d++;
                 if (y < d) {
                     d--;
                     break;
                 }
-                if (board[x][y - d] == player) {
+                if (newBoard[x][y - d] == player) {
                     while (d > 0) {
-                        board[x][y - d] = player;
+                        newBoard[x][y - d] = player;
                         d--;
                     }
                 }
             }
         }
-        if (y < board[0].length - 1 && (board[x][y + 1] == opponent)) {
+        if (y < newBoard[0].length - 1 && (newBoard[x][y + 1] == opponent)) {
             d = 1;
-            while (board[x][y + d] == opponent) {
+            while (newBoard[x][y + d] == opponent) {
                 d++;
-                if (y + d >= board[0].length) {
+                if (y + d >= newBoard[0].length) {
                     d--;
                     break;
                 }
-                if (board[x][y + d] == player) {
+                if (newBoard[x][y + d] == player) {
                     while (d > 0) {
-                        board[x][y + d] = player;
+                        newBoard[x][y + d] = player;
                         d--;
                     }
                 }
             }
         }
-        if (x < board[0].length - 1 && (board[x + 1][y] == opponent)) {
+        if (x < newBoard[0].length - 1 && (newBoard[x + 1][y] == opponent)) {
             d = 1;
-            while (board[x + d][y] == opponent) {
+            while (newBoard[x + d][y] == opponent) {
                 d++;
-                if (x + d >= board[0].length) {
+                if (x + d >= newBoard[0].length) {
                     d--;
                     break;
                 }
-                if (board[x + d][y] == player) {
+                if (newBoard[x + d][y] == player) {
                     while (d > 0) {
-                        board[x + d][y] = player;
+                        newBoard[x + d][y] = player;
                         d--;
                     }
                 }
             }
         }
-        if (x < board[0].length - 1 && y < board[0].length - 1 && (board[x + 1][y + 1] == opponent)) {
+        if (x < newBoard[0].length - 1 && y < newBoard[0].length - 1 && (newBoard[x + 1][y + 1] == opponent)) {
             d = 1;
-            while (board[x + d][y + d] == opponent) {
+            while (newBoard[x + d][y + d] == opponent) {
                 d++;
-                if (x + d >= board[0].length || y + d >= board[0].length) {
+                if (x + d >= newBoard[0].length || y + d >= newBoard[0].length) {
                     d--;
                     break;
                 }
-                if (board[x + d][y + d] == player) {
+                if (newBoard[x + d][y + d] == player) {
                     while (d > 0) {
-                        board[x + d][y + d] = player;
+                        newBoard[x + d][y + d] = player;
                         d--;
                     }
                 }
             }
         }
-        return board;
+        return newBoard;
     }
 
     public static boolean hasBothPlayers(char[][] board){
@@ -171,49 +176,49 @@ public class GameUtils {
                 if(board[i][j] == opponent){
                     if(i> 0 && j > 0 && board[i - 1][j - 1] == '*'){
                         action = (i - 1) + "," + (j - 1);
-                        if(!action.contains(action)){
+                        if(!actions.contains(action)){
                             actions.add(action);
                         }
                     }
                     if(i> 0 && board[i - 1][j] == '*'){
                         action = (i - 1) + "," + j;
-                        if(!action.contains(action)){
+                        if(!actions.contains(action)){
                             actions.add(action);
                         }
                     }
                     if(i> 0 && j < board[0].length - 1 && board[i - 1 ][j + 1] == '*'){
                         action = (i - 1) + "," + (j + 1);
-                        if(!action.contains(action)){
+                        if(!actions.contains(action)){
                             actions.add(action);
                         }
                     }
                     if(j > 0 && board[i][j - 1] == '*'){
                         action = i + "," + (j - 1);
-                        if(!action.contains(action)){
+                        if(!actions.contains(action)){
                             actions.add(action);
                         }
                     }
                     if(j < board[i].length - 1 && board[i][j + 1] == '*'){
                         action = i + "," + (j + 1);
-                        if(!action.contains(action)){
+                        if(!actions.contains(action)){
                             actions.add(action);
                         }
                     }
                     if(i < board.length - 1 && j > 0 && board[i + 1 ][j - 1] == '*'){
                         action = (i + 1) + "," + (j - 1);
-                        if(!action.contains(action)){
+                        if(!actions.contains(action)){
                             actions.add(action);
                         }
                     }
                     if(i < board.length - 1 && board[i + 1 ][j] == '*'){
                         action = (i + 1) + "," + (j);
-                        if(!action.contains(action)){
+                        if(!actions.contains(action)){
                             actions.add(action);
                         }
                     }
                     if(i < board.length - 1 && j < board[0].length - 1 && board[i + 1 ][j + 1] == '*'){
                         action = (i + 1) + "," + (j + 1);
-                        if(!action.contains(action)){
+                        if(!actions.contains(action)){
                             actions.add(action);
                         }
                     }
